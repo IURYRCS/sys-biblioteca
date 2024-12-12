@@ -8,7 +8,7 @@ module com.example.sysbiblioteca {
     requires net.synedra.validatorfx;
     requires org.kordamp.ikonli.javafx;
     requires org.kordamp.bootstrapfx.core;
-    requires eu.hansolo.tilesfx;
+   // requires eu.hansolo.tilesfx;
     requires com.almasb.fxgl.all;
     requires jdk.compiler;
     requires java.naming;
@@ -18,10 +18,10 @@ module com.example.sysbiblioteca {
 
 
     opens com.example.sysbiblioteca to javafx.fxml;
+    opens com.example.sysbiblioteca.model.entity to org.hibernate.orm.core;
     exports com.example.sysbiblioteca;
 
     exports com.example.sysbiblioteca.model.entity;
-    opens com.example.sysbiblioteca.model.entity to javafx.fxml;
     exports com.example.sysbiblioteca.controller;
     opens com.example.sysbiblioteca.controller to javafx.fxml;
 

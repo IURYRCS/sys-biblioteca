@@ -27,17 +27,9 @@ public class MainController implements Initializable {
         @FXML
         Menu menuCadastro;
         @FXML
-        Menu menuRelatorios;
-        @FXML
         Menu menuHelp;
         @FXML
         MenuItem menuItemLivros;
-        @FXML
-        MenuItem menuItemLocacao;
-        @FXML
-        MenuItem menuItemManutencao;
-        @FXML
-        MenuItem menuItemRelatorioLivro;
         @FXML
         MenuItem menuItemAbout;
 
@@ -50,21 +42,7 @@ public class MainController implements Initializable {
         //******************************************************************************************************************
         // TRATAMENTO DE EVENTOS
         @FXML
-        public void onCadastroLivroAction(){
-            loadView("\\LivroView.fxml");
-        }
-        @FXML
-        public void onCadastroLocacaoAction(){
-            System.out.println("menu Livro");
-        }
-        @FXML
-        public void onCadastroManutencaoAction(){
-            System.out.println("menu manutenção");
-        }
-        @FXML
-        public void onRelatorioVeiculosAction(){
-            System.out.println("menu relatorio Livro");
-        }
+        public void onCadastroLivroAction(){loadView("\\LivroView.fxml");}
         @FXML
         public void onHelpAboutAction(){
             Alerta.exibirAlerta("Biblioteca","About","Biblioteca V 1.0", Alert.AlertType.INFORMATION);

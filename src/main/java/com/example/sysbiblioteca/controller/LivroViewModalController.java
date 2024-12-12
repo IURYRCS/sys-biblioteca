@@ -1,6 +1,7 @@
 package com.example.sysbiblioteca.controller;
 
 
+import com.dlsc.formsfx.model.structure.DateField;
 import com.example.sysbiblioteca.model.entity.Livro;
 import com.example.sysbiblioteca.model.services.LivroServices;
 import javafx.fxml.FXML;
@@ -91,6 +92,7 @@ public class LivroViewModalController extends LivroController {
             txtAnoDeLancamento.setUserData(livro.getAnoDeLancamento());
             txtAutor.setText(livro.getAutor());
             txtGenero.setText(livro.getGenero());
+
         }
     }
 

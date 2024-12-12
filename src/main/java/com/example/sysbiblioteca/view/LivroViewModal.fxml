@@ -15,7 +15,7 @@
     <children>
         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: #484f4f;">
             <children>
-                <Label text="Veículo" textFill="WHITE">
+                <Label text="Livro" textFill="WHITE">
                     <font>
                         <Font name="System Bold" size="36.0" />
                     </font>
@@ -45,7 +45,7 @@
                 <Label text="Autor:" GridPane.rowIndex="4" GridPane.valignment="BOTTOM" />
                 <Label text="Genero:" GridPane.rowIndex="6" GridPane.valignment="BOTTOM" />
                 <TextField fx:id="txtTitulo" GridPane.rowIndex="1" />
-                <TextField fx:id="txtAno" GridPane.rowIndex="3" />
+                <TextField fx:id="txtAnoDeLancamento" GridPane.rowIndex="3" />
                 <TextField fx:id="txtAutor" GridPane.rowIndex="5" />
                 <TextField fx:id="txtGenero" GridPane.rowIndex="7" />
             </children>

@@ -118,7 +118,7 @@ public class LivroController implements Initializable {
     @FXML
     public void onBtnNovoAction(){
         this.livro = null;
-        modalView("Manter Veiculos","\\VeiculoViewModal.fxml");
+        modalView("Manter Livros","\\LivroViewModal.fxml");
         updateTableView();}
 
 }
