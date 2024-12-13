@@ -24,6 +24,8 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URL;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -39,7 +41,7 @@ public class LivroController implements Initializable {
     @FXML
     TableColumn <Livro, String> columnTituloLivro;
     @FXML
-    TableColumn <Livro, String> columnAnoDeLancamentoLivro;
+    TableColumn <Livro, Date> columnAnoDeLancamentoLivro;
     @FXML
     TableColumn <Livro, String> columnAutorLivro;
     @FXML
@@ -64,7 +66,23 @@ public class LivroController implements Initializable {
         // Vincula as celulas de cada coluna com os campos da classe model
         columnIdLivro.setCellValueFactory(new PropertyValueFactory<>("id"));
         columnTituloLivro.setCellValueFactory(new PropertyValueFactory<>("titulo"));
-        columnAnoDeLancamentoLivro.setCellValueFactory(new PropertyValueFactory<>("ano"));
+
+        // Usar um CellValueFactory para formatar a data
+        columnAnoDeLancamentoLivro.setCellValueFactory(new PropertyValueFactory<>("anoDeLancamento"));
+        columnAnoDeLancamentoLivro.setCellFactory(column -> new TableCell<Livro, Date>() {
+            private final SimpleDateFormat sdf = new SimpleDateFormat("yyyy");
+
+            @Override
+            protected void updateItem(Date item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty || item == null) {
+                    setText(null);
+                } else {
+                    setText(sdf.format(item)); // Formata a data para exibir apenas o ano
+                }
+            }
+        });
+
         columnAutorLivro.setCellValueFactory(new PropertyValueFactory<>("autor"));
         columnGeneroLivro.setCellValueFactory(new PropertyValueFactory<>("genero"));
 

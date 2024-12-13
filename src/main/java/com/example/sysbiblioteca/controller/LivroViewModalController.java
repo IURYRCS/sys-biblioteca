@@ -1,7 +1,5 @@
 package com.example.sysbiblioteca.controller;
 
-
-import com.dlsc.formsfx.model.structure.DateField;
 import com.example.sysbiblioteca.model.entity.Livro;
 import com.example.sysbiblioteca.model.services.LivroServices;
 import javafx.fxml.FXML;
@@ -11,6 +9,8 @@ import javafx.stage.Stage;
 import lombok.Setter;
 
 import java.net.URL;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.ResourceBundle;
 
@@ -34,6 +34,7 @@ public class LivroViewModalController extends LivroController {
     private LivroServices livroServices;
 
     private Livro livro;
+
     //*****************************************************************************************************************
     // INICIALIZAÇÃO
     @Override
@@ -46,15 +47,14 @@ public class LivroViewModalController extends LivroController {
         try {
             if (livro == null) {
                 this.livro = new Livro();
-                lerCampos();
-                livroServices.addLivro(livro);
-                fecharModal();
-            } else {
-                lerCampos();
-                livroServices.updateLivro(livro);
-                fecharModal();
             }
-
+            lerCampos();
+            if (livro.getId() == null) {
+                livroServices.addLivro(livro);
+            } else {
+                livroServices.updateLivro(livro);
+            }
+            fecharModal();
         } catch (Exception e) {
             System.err.println(e.getMessage());
         }
@@ -62,8 +62,9 @@ public class LivroViewModalController extends LivroController {
 
     @FXML
     public void btnExcluirOnAction() {
-        lerCampos();
-        livroServices.removeLivro(livro.getId());
+        if (livro != null) {
+            livroServices.removeLivro(livro.getId());
+        }
         fecharModal();
     }
 
@@ -89,18 +90,40 @@ public class LivroViewModalController extends LivroController {
     private void preencherCampos() {
         if (livro != null) {
             txtTitulo.setText(livro.getTitulo());
-            txtAnoDeLancamento.setUserData(livro.getAnoDeLancamento());
+
+            // Formatar a data para exibir apenas o ano
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy");
+            if (livro.getAnoDeLancamento() != null) {
+                txtAnoDeLancamento.setText(sdf.format(livro.getAnoDeLancamento()));
+            } else {
+                txtAnoDeLancamento.setText(""); // Limpar o campo se a data for nula
+            }
+
             txtAutor.setText(livro.getAutor());
             txtGenero.setText(livro.getGenero());
-
         }
     }
 
     private void lerCampos() {
         this.livro.setTitulo(txtTitulo.getText());
-        this.livro.setAnoDeLancamento((Date) txtAnoDeLancamento.getUserData());
+
+        // Lógica para ler o ano de lançamento
+        String anoText = txtAnoDeLancamento.getText();
+        if (anoText.length() != 4 || !anoText.matches("\\d{4}")) {
+            throw new IllegalArgumentException("Por favor, insira um ano válido com 4 dígitos.");
+        }
+
+        int ano = Integer.parseInt(anoText);
+        String dataString = ano + "-01-01"; // Definindo 1º de janeiro como data padrão
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            Date anoDeLancamento = sdf.parse(dataString);
+            this.livro.setAnoDeLancamento(anoDeLancamento);
+        } catch (ParseException e) {
+            throw new RuntimeException("Erro ao converter a data: " + e.getMessage());
+        }
+
         this.livro.setAutor(txtAutor.getText());
         this.livro.setGenero(txtGenero.getText());
     }
-
 }

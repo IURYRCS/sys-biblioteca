@@ -21,7 +21,6 @@ public class MainApp extends Application {
         System.out.println(PathFXML.pathBase());
         FXMLLoader fxmlLoader = new FXMLLoader();
 
-        //fxmlLoader.setRoot(scrollPaneMain);
         Parent root = fxmlLoader.load(new FileInputStream(PathFXML.pathBase() + "\\MainView.fxml"));
         scene = new Scene(root, 800, 550);
 

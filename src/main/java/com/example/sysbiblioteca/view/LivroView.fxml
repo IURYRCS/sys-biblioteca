@@ -31,7 +31,7 @@
             <columns>
                 <TableColumn fx:id="columnIdLivro" prefWidth="75.0" text="ID" />
                 <TableColumn fx:id="columnTituloLivro" prefWidth="75.0" text="Titulo" />
-                <TableColumn fx:id="columnAnoDeLancamentoLivro" prefWidth="75.0" text="Ano" />
+                <TableColumn fx:id="columnAnoDeLancamentoLivro" maxWidth="222.0" prefWidth="75.0" text="Ano" />
                 <TableColumn fx:id="columnAutorLivro" prefWidth="75.0" text="Autor" />
                 <TableColumn fx:id="columnGeneroLivro" prefWidth="75.0" text="Gênero" />
             </columns>
